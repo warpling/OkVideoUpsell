@@ -1,23 +1,12 @@
 {
-  "appPolicies" : {
-    "eula" : "",
-    "policies" : [
-      {
-        "locale" : "en_US",
-        "policyText" : "",
-        "policyURL" : ""
-      }
-    ]
-  },
-  "identifier" : "E7A3F1B2-4C8D-49E5-A6D0-3B7F2E9C1A5D",
-  "nonRenewingSubscriptions" : [
-
-  ],
+  "identifier" : "F3A1B2C4-D5E6-7890-ABCD-EF1234567890",
+  "type" : "Configuration",
+  "version" : 1,
   "products" : [
     {
       "displayPrice" : "4.99",
       "familyShareable" : false,
-      "internalID" : "okvideo_pro",
+      "internalID" : "A1B2C3D4-E5F6-7890-1234-567890ABCDE1",
       "localizations" : [
         {
           "description" : "Unlimited Projects, Remove Watermark, and Timeline Editor — all in one purchase.",
@@ -32,7 +21,7 @@
     {
       "displayPrice" : "2.99",
       "familyShareable" : false,
-      "internalID" : "okvideo_projects",
+      "internalID" : "A1B2C3D4-E5F6-7890-1234-567890ABCDE2",
       "localizations" : [
         {
           "description" : "Create unlimited projects. Never delete a project again.",
@@ -47,7 +36,7 @@
     {
       "displayPrice" : "1.99",
       "familyShareable" : false,
-      "internalID" : "okvideo_watermark",
+      "internalID" : "A1B2C3D4-E5F6-7890-1234-567890ABCDE3",
       "localizations" : [
         {
           "description" : "Export professional, watermark-free videos.",
@@ -62,7 +51,7 @@
     {
       "displayPrice" : "3.99",
       "familyShareable" : false,
-      "internalID" : "okvideo_editor",
+      "internalID" : "A1B2C3D4-E5F6-7890-1234-567890ABCDE4",
       "localizations" : [
         {
           "description" : "Full timeline editing with clips, trimming, and reordering.",
@@ -76,59 +65,6 @@
     }
   ],
   "settings" : {
-    "_askToBuyEnabled" : false,
-    "_billingGracePeriodEnabled" : false,
-    "_billingIssuesEnabled" : false,
-    "_disableDialogs" : false,
-    "_failTransactionsEnabled" : false,
-    "_locale" : "en_US",
-    "_renewalBillingIssuesEnabled" : false,
-    "_storefront" : "USA",
-    "_storeKitErrors" : [
-      {
-        "enabled" : false,
-        "name" : "Load Products"
-      },
-      {
-        "enabled" : false,
-        "name" : "Purchase"
-      },
-      {
-        "enabled" : false,
-        "name" : "Verification"
-      },
-      {
-        "enabled" : false,
-        "name" : "App Store Sync"
-      },
-      {
-        "enabled" : false,
-        "name" : "Subscription Status"
-      },
-      {
-        "enabled" : false,
-        "name" : "App Transaction"
-      },
-      {
-        "enabled" : false,
-        "name" : "Manage Subscriptions Sheet"
-      },
-      {
-        "enabled" : false,
-        "name" : "Refund Request Sheet"
-      },
-      {
-        "enabled" : false,
-        "name" : "Offer Code Redeem Sheet"
-      }
-    ],
-    "_timeRate" : 0
-  },
-  "subscriptionGroups" : [
-
-  ],
-  "version" : {
-    "major" : 4,
-    "minor" : 0
+    "_storefront" : "USA"
   }
 }
