@@ -12,7 +12,8 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @State private var showUpsell = false
+    @State private var showSwiftUIUpsell = false
+    @State private var showUIKitUpsell = false
     @StateObject private var storeManager = StoreManager()
 
     var body: some View {
@@ -30,9 +31,9 @@ struct ContentView: View {
                     .foregroundStyle(.white)
 
                 Button {
-                    showUpsell = true
+                    showSwiftUIUpsell = true
                 } label: {
-                    Label("Show Pro Upsell", systemImage: "lock.fill")
+                    Label("SwiftUI Upsell", systemImage: "swift")
                         .font(.headline)
                         .foregroundStyle(.white)
                         .padding(.horizontal, 24)
@@ -42,13 +43,29 @@ struct ContentView: View {
                             in: Capsule()
                         )
                 }
+
+                Button {
+                    showUIKitUpsell = true
+                } label: {
+                    Label("UIKit Upsell", systemImage: "hammer.fill")
+                        .font(.headline)
+                        .foregroundStyle(Color(red: 1.0, green: 0.26, blue: 0.40))
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 14)
+                        .background(
+                            Color(red: 1.0, green: 0.26, blue: 0.40).opacity(0.15),
+                            in: Capsule()
+                        )
+                        .overlay(Capsule().stroke(Color(red: 1.0, green: 0.26, blue: 0.40), lineWidth: 1.5))
+                }
             }
         }
-        .sheet(isPresented: $showUpsell) {
-            // Sheet presentation (detents, background, drag indicator)
-            // is handled inside OKVideoProUpsellView itself.
+        .sheet(isPresented: $showSwiftUIUpsell) {
             OKVideoProUpsellView(storeManager: storeManager)
         }
+        .background(
+            UIKitUpsellPresenter(isPresented: $showUIKitUpsell, storeManager: storeManager)
+        )
     }
 }
 
