@@ -50,6 +50,15 @@ private let proFeatures: [ProFeature] = [
     ),
 ]
 
+// MARK: - Content Height Measurement
+
+private struct ContentHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
+}
+
 // MARK: - Upsell View
 
 struct OKVideoProUpsellView: View {
@@ -60,6 +69,7 @@ struct OKVideoProUpsellView: View {
     @State private var showIndividualOptions = false
     @State private var isPurchasing = false
     @State private var purchaseError: String?
+    @State private var compactHeight: CGFloat = 0
 
     // MARK: Body
 
@@ -81,8 +91,19 @@ struct OKVideoProUpsellView: View {
                     Spacer().frame(height: 8)
                 }
                 .padding(.horizontal, 24)
+                .background(
+                    GeometryReader { geo in
+                        Color.clear.preference(key: ContentHeightKey.self, value: geo.size.height)
+                    }
+                )
             }
             .scrollBounceBehaviorIfAvailable()
+            .onPreferenceChange(ContentHeightKey.self) { height in
+                // Only capture the compact height when individual options are hidden
+                if !showIndividualOptions {
+                    compactHeight = height
+                }
+            }
 
             closeButton
         }
@@ -99,7 +120,7 @@ struct OKVideoProUpsellView: View {
         } message: {
             Text(purchaseError ?? "")
         }
-        .smartSheetPresentation(isExpanded: showIndividualOptions)
+        .smartSheetPresentation(isExpanded: showIndividualOptions, compactHeight: compactHeight)
     }
 
     // MARK: - Close Button
@@ -378,21 +399,41 @@ struct OKVideoProUpsellView: View {
 
 // MARK: - Smart Sheet Presentation (iOS 16+)
 
-/// Manages sheet detents: starts compact, auto-expands when individual
-/// options are revealed, and falls back gracefully on older iOS.
+/// Manages sheet detents: sizes the compact detent to the measured content
+/// height, auto-expands to .large when individual options are revealed.
 @available(iOS 16.0, *)
 private struct SheetPresentationModifier: ViewModifier {
     var isExpanded: Bool
-    @State private var selectedDetent: PresentationDetent = .fraction(0.85)
+    var compactHeight: CGFloat
+
+    @State private var selectedDetent: PresentationDetent = .large
+
+    private var compactDetent: PresentationDetent {
+        compactHeight > 0 ? .height(compactHeight) : .large
+    }
 
     func body(content: Content) -> some View {
         content
-            .presentationDetents([.fraction(0.85), .large], selection: $selectedDetent)
+            .presentationDetents(
+                compactHeight > 0
+                    ? [.height(compactHeight), .large]
+                    : [.large],
+                selection: $selectedDetent
+            )
             .presentationDragIndicator(.visible)
             .presentationBackgroundIfAvailable()
+            // Snap to measured compact height once available
+            .task(id: compactHeight) {
+                if !isExpanded && compactHeight > 0 {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.9)) {
+                        selectedDetent = .height(compactHeight)
+                    }
+                }
+            }
+            // Expand/collapse when individual options toggle
             .task(id: isExpanded) {
                 withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
-                    selectedDetent = isExpanded ? .large : .fraction(0.85)
+                    selectedDetent = isExpanded ? .large : compactDetent
                 }
             }
     }
@@ -403,9 +444,9 @@ private struct SheetPresentationModifier: ViewModifier {
 extension View {
     /// Applies smart sheet detents on iOS 16+; plain sheet on iOS 15.
     @ViewBuilder
-    fileprivate func smartSheetPresentation(isExpanded: Bool) -> some View {
+    fileprivate func smartSheetPresentation(isExpanded: Bool, compactHeight: CGFloat) -> some View {
         if #available(iOS 16.0, *) {
-            self.modifier(SheetPresentationModifier(isExpanded: isExpanded))
+            self.modifier(SheetPresentationModifier(isExpanded: isExpanded, compactHeight: compactHeight))
         } else {
             self
         }
