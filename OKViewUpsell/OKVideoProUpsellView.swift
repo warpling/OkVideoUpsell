@@ -383,16 +383,16 @@ struct OKVideoProUpsellView: View {
 @available(iOS 16.0, *)
 private struct SheetPresentationModifier: ViewModifier {
     var isExpanded: Bool
-    @State private var selectedDetent: PresentationDetent = .fraction(0.7)
+    @State private var selectedDetent: PresentationDetent = .fraction(0.85)
 
     func body(content: Content) -> some View {
         content
-            .presentationDetents([.fraction(0.7), .large], selection: $selectedDetent)
+            .presentationDetents([.fraction(0.85), .large], selection: $selectedDetent)
             .presentationDragIndicator(.visible)
             .presentationBackgroundIfAvailable()
             .task(id: isExpanded) {
                 withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
-                    selectedDetent = isExpanded ? .large : .fraction(0.7)
+                    selectedDetent = isExpanded ? .large : .fraction(0.85)
                 }
             }
     }
