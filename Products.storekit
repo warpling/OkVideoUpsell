@@ -1,0 +1,70 @@
+{
+  "identifier" : "F3A1B2C4-D5E6-7890-ABCD-EF1234567890",
+  "type" : "Configuration",
+  "version" : 1,
+  "products" : [
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "A1B2C3D4-E5F6-7890-1234-567890ABCDE1",
+      "localizations" : [
+        {
+          "description" : "Unlimited Projects, Remove Watermark, and Timeline Editor — all in one purchase.",
+          "displayName" : "OKVideo Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.okvideo.pro",
+      "referenceName" : "OKVideo Pro Bundle",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "A1B2C3D4-E5F6-7890-1234-567890ABCDE2",
+      "localizations" : [
+        {
+          "description" : "Create unlimited projects. Never delete a project again.",
+          "displayName" : "Unlimited Projects",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.okvideo.projects",
+      "referenceName" : "Multiple Projects",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "A1B2C3D4-E5F6-7890-1234-567890ABCDE3",
+      "localizations" : [
+        {
+          "description" : "Export professional, watermark-free videos.",
+          "displayName" : "Remove Watermark",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.okvideo.watermark",
+      "referenceName" : "Remove Watermark",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "A1B2C3D4-E5F6-7890-1234-567890ABCDE4",
+      "localizations" : [
+        {
+          "description" : "Full timeline editing with clips, trimming, and reordering.",
+          "displayName" : "Timeline Editor",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.okvideo.editor",
+      "referenceName" : "Timeline Editor",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_storefront" : "USA"
+  }
+}

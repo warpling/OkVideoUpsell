@@ -321,11 +321,11 @@ struct OKVideoProUpsellView: View {
                     Task { await purchaseIndividual(product) }
                 } label: {
                     Text(product.displayPrice)
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(okAccent)
-                        .padding(.horizontal, 12)
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 14)
                         .padding(.vertical, 7)
-                        .background(okAccent.opacity(0.12), in: Capsule())
+                        .background(okAccent, in: Capsule())
                 }
                 .disabled(isPurchasing)
             }
